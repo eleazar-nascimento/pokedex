@@ -1,38 +1,63 @@
-import { Flex, Image, Text } from '@chakra-ui/react';
+import axios from 'axios';
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Image,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react';
+
+import ModalComponent from '../Modal';
 
 interface CardProps {
-  image: any;
-  name: any;
+  image: string;
+  name: string;
+  id: number;
 }
 
-function Card({ image, name }: CardProps) {
+function CardComponent({ image, name, id }: CardProps) {
+  const { onOpen, isOpen, onClose } = useDisclosure();
+
   return (
-    <Flex
-      direction="column"
-      as="div"
-      p="40px"
-      bg="#f4f4f4"
-      w="300px"
-      align="center"
-      cursor="pointer"
-      borderRadius={8}
-    >
-      <Image
-        src={image}
-        alt={name}
-        h={200}
-        style={{ imageRendering: 'pixelated' }}
+    <Card variant="outline" alignItems="center">
+      <ModalComponent
+        isOpen={isOpen}
+        onClose={onClose}
+        name={name}
       />
-      <Text
-        size="32px"
-        textTransform="uppercase"
-        color="blackAlpha.700"
-        fontWeight="bold"
-      >
-        {name}
-      </Text>
-    </Flex>
+      <CardBody>
+        <Image
+          src={image}
+          alt={name}
+          h={200}
+          style={{ imageRendering: 'pixelated' }}
+          bgColor="yellow.50"
+          borderRadius="lg"
+        />
+        <Text
+          pt="5"
+          size="32px"
+          textTransform="uppercase"
+          textAlign="center"
+          fontWeight="bold"
+        >
+          {id} - {name}
+        </Text>
+      </CardBody>
+      <CardFooter>
+        <Button
+          onClick={
+            () => onOpen()
+          }
+        >
+          More Info
+        </Button>
+      </CardFooter>
+    </Card >
   );
 }
 
-export default Card;
+export default CardComponent;
