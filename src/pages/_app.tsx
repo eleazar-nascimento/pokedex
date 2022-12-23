@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           padding: 0,
           margin: 0,
           color: '#222',
-          background: 'orangered',
+          // backgroundColor: 'orangered',
         },
         h2: {
           fontSize: '44px',
