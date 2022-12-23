@@ -28,31 +28,26 @@ export function Pokeman() {
   }));
 
 
-  console.log(pokeman);
+  console.log(data);
 
   const listPokemon = pokeman?.filter((pokeman: PokemanProps) => pokeman.name.toLowerCase().includes(query))?.map((pokeman: PokemanProps) => {
-    return <Card key={pokeman.id} image={pokeman.image} name={pokeman.name} />
+    return <Card key={pokeman.id} image={pokeman.image} name={pokeman.name} id={pokeman.id} />
   })
-
-  // const searchPokemon = () => {
-  //   const filter = data?.results.filter((pokeman: any) => pokeman.name.toLowerCase().includes(query));
-  //   console.log(pokemon);
-  // };
 
   useEffect(() => {
     (async () => {
-      const { data } = await Api.get('https://pokeapi.co/api/v2/pokemon?limit=800');
+      const { data } = await Api.get('https://pokeapi.co/api/v2/pokemon?limit=905');
       setData(data);
     })()
   }, []);
 
   return (
-    <VStack spacing={10} pt={8}>
-      <Button onClick={toggleColorMode}>
-        Mudar Cor de fundo {colorMode === 'light' ? 'Dark' : 'Light'}
+    <VStack spacing={10} pt={8} pb={8}>
+      <Button color="orangered" onClick={toggleColorMode}>
+        Change the theme to {colorMode === 'light' ? 'Dark' : 'Light'}
       </Button>
-      <Heading as="h2" color="white" textTransform="uppercase">Your list of Pokémon!</Heading>
-      <Input type="text" color="white" placeholder='Procure seu pokemon' onChange={(e: any) => setQuery(e.target.value)} />
+      <Heading as="h2" color="orangered" textTransform="uppercase">Your list of Pokémon!</Heading>
+      <Input w="auto" type="text" color="white" placeholder='Procure seu pokemon' onChange={(e: any) => setQuery(e.target.value)} />
       {
         data === null ? (
           <Flex justify="center" align="center" pt="300px">
